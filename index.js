@@ -6,11 +6,12 @@
  * array - Вхідний масив
  * Повертає: Масив користувачів.
  */
-function getUsersFromDatabase(array) { let a = Array.from(array, array.id=id,array.name=firstName.toUpperCase, array.age=years); return a;
+function getUsersFromDatabase(array) { const users = Array.from(array, (record) => {return { id: record.id, firstName: record.name.toUpperCase(),
+  years: record.age, }; }); return users;}
   // Використовуємо метод `Array.from` для створення масиву користувачів зі списку, елементи якого це об'єкти які міститять
   // id який дорівнює id користувача,firstName який дорівнює firstName користувача в верхньому регістрі та years який дорівнює age користувача
   // Повертаємо масив користувачів
-}
+
 
 // Приклад використання функції getUsersFromDatabase
 const userRecords = [
@@ -207,7 +208,7 @@ console.log(copyAndSwapElements([1, 2, 3, 4, 5], 0, 2, 4)); // Виведе [3, 
  * Повертає:  Ключ, за яким потрібно сортувати об'єкти.
  * Повертає: Відсортований масив об'єктів.
  */
-function sortByKey(arr, key) {const arr1=arr.sort(a,b); if(a[key]<b[key]){return -1;}else if (a[key]>b[key]){return 1;} else{return 0;}
+function sortByKey(arr, key) {arr.sort((a,b)=> {if(a[key]<b[key]){return -1;}else if (a[key]>b[key]){return 1;} return 0;}); return arr;
   // Використовуємо метод `sort` передаємо в нього два аргументи a та b, для сортування масиву об'єктів за заданим ключем
   // якщо a[key] < b[key] повертаємо -1
   // якщо a[key] > b[key] повертаємо 1
@@ -238,7 +239,7 @@ console.log(sortByKey(unsortedArray, "age"));
  * condition - Функція-умова, яка буде застосовуватись до кожного елементу масиву.
  *Повертає: Результат перевірки.
  */
-function customEvery(arr, condition) { if (Array.isArray(arr)===false){return `false`;} else { return arr.every(condition);}
+function customEvery(arr, condition) { if (Array.isArray(arr)===false){return `false`;} else if (typeof condition !== "function") {return `false`;} else { return arr.every(condition);}
   // Перевірка вхідних параметрів
   // якщо arr не масив повертаємо false
   // якщо condition не function повертаємо false
@@ -302,7 +303,7 @@ console.log(customShift([1, 2, 3, 4, 5])); // Виведе { shiftedElement: 1, 
  *  elements - Елементи, які будуть додані на початок масиву.
  *  Нова довжина масиву після додавання елементів.
  */
-function customUnshift(arr, ...elements) { if(!Array.isArray(arr)){return;} const initialLength= arr.length;
+function customUnshift(arr, ...elements) { if(!Array.isArray(arr)){return false;} const initialLength= arr.length;
 for (let i=elements.lenght -1; i>=0; i--){arr.unshift(elements[i]);} const newLength = arr.length;
 return {initialLength, newLength, arr};
   
@@ -328,7 +329,7 @@ console.log(customUnshift([2, 3, 4, 5], 1, 0)); // Виведе { initialLength:
  * condition - Функція-умова, яка буде застосовуватись до кожного елементу масиву.
  * Повертає: Результат перевірки.
  */
-function customSome(arr, condition) { if (Array.isArray(arr)===false){return `false`;} else { return arr.some(condition);} 
+function customSome(arr, condition) { if (Array.isArray(arr)===false){return `false`;} else if (typeof condition !== "function") {return `false`;} else { return arr.some(condition);} 
   // Перевіряємо, чи вхідний параметр є масивом якщо ні повертаємо false
   // Перевіряємо, чи condition є функцією  якщо ні повертаємо false
   // Використовуємо метод `some` для перевірки умови хоча б для одного елементу масиву
@@ -377,14 +378,15 @@ console.log(customAt([1, 2, 3, 4, 5], 2));
    element - Елемент, наявність якого перевіряється.
   Повертає: Результат перевірки.
   */
-function customIncludes(arr, element) {if (Array.isArray(arr)===false){return `undefined`;} const result=arr.includes(element);
-const count=arr.filter((item)=>item === element).lenght; console.log(count); return result;
+function customIncludes(arr, element) {if (Array.isArray(arr)===false){return `undefined`;} 
+const result = arr.includes(element); const count = arr.filter((item) => item === element).lenght;
+console.log(count);  return result;}
 
   // Перевіряємо, чи вхідний параметр є масивом
   // Використовуємо метод includes для перевірки наявності елемента в масиві
   // За допомогою методу filter перевіряємо скільки разів в масиві зустрічається елемент та виводимо число в консоль
   //Повертаємо результат
-}
+
 
 console.log("Завдання: 17 ==============================");
 console.log(customIncludes(["apple", "banana", "orange", "apple"], "banana"));
